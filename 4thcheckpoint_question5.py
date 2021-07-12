@@ -9,6 +9,6 @@ for i in range (a):
 def calculate():
     for i in range (len(liste)):
         newlist.append(math.floor((10*liste[i]/3)**0.5))
-    print(newlist)
-calculate()
+    return(newlist)
+print(calculate())
         

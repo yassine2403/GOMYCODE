@@ -8,17 +8,24 @@ exam_data = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Micha
 'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes'],
 'labels' : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']}
 
-df=pd.DataFrame(exam_data)
+df=pd.DataFrame(exam_data,)
 
-##extracting 2 first columns
-na = df.iloc[:, 0:2]
+print(df.iloc[:, 0:2])
 
-l={'name':'Suresh','score':15.5,'attempts':1,'qualify':'yes'}
-##adding row for suresh
-serie=pd.Series(l)
-df=df.append(serie, ignore_index=True)
-##suppressing attempt column
+
+
+l=['Suresh',15.5,1,'yes','k']
+serie=pd.Series(l,index=['name','score','attempts','qualify','labels'])
+
+
+
+
 new_df=df.drop(['attempts'],axis=1)
+df=df.dropna()
+
+df=df.append(serie, ignore_index=True)
+
+
 
 for i in df.itertuples():
     if i[2]>=10:
@@ -28,6 +35,11 @@ for i in df.itertuples():
 
 
 df['success']=dict1['Success']
-#dropping nan rows
-print(df.dropna())
-    
+
+print(df.set_index('labels'))
+df.to_csv('raw_di.csv', index=True)
+import csv
+with open('raw_di.csv') as file:
+    c=csv.reader(file,delimiter=',')
+    for i in c:
+        print(type(c))
